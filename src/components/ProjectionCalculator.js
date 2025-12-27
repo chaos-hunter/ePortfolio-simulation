@@ -16,9 +16,9 @@ export default function ProjectionCalculator({ currentStock, portfolio }) {
         if (currentStock) {
             // Auto-fill expected return based on 52-week change
             if (currentStock.fiftyTwoWeekChangePercent !== undefined) {
-                setRate(Math.round(currentStock.fiftyTwoWeekChangePercent * 10) / 10);
+                setRate(Math.round(currentStock.fiftyTwoWeekChangePercent * 100) / 100);
             } else {
-                setRate(10); // Default fallback
+                setRate(10.00); // Default fallback
             }
 
             // Clear previous projection data when switching stocks
@@ -31,9 +31,10 @@ export default function ProjectionCalculator({ currentStock, portfolio }) {
         if (currentStock) {
             const holding = portfolio?.find(p => p.symbol === currentStock.symbol);
             if (holding) {
-                setInvestment(holding.price * holding.amount);
+                const totalValue = holding.price * holding.amount;
+                setInvestment(Math.round(totalValue * 100) / 100);
             } else {
-                setInvestment(1000); // Default if not owned
+                setInvestment(1000.00); // Default if not owned
             }
         }
     }, [currentStock?.symbol, portfolio]);
