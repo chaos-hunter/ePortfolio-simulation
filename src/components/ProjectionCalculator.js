@@ -11,28 +11,32 @@ export default function ProjectionCalculator({ currentStock, portfolio }) {
     const [projectionData, setProjectionData] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    // 1. Auto-fill Rate and clear projection only when the stock symbol changes
     useEffect(() => {
         if (currentStock) {
-            // Auto-fill initial investment if owned
-            const holding = portfolio?.find(p => p.symbol === currentStock.symbol);
-            if (holding) {
-                setInvestment(holding.price * holding.amount);
-            } else {
-                setInvestment(1000); // Default if not owned
-            }
-
             // Auto-fill expected return based on 52-week change
-            // fiftyTwoWeekChangePercent is typically a number like 35.12 for 35.12%
             if (currentStock.fiftyTwoWeekChangePercent !== undefined) {
                 setRate(Math.round(currentStock.fiftyTwoWeekChangePercent * 10) / 10);
             } else {
                 setRate(10); // Default fallback
             }
 
-            // Clear previous projection data when stock changes
+            // Clear previous projection data when switching stocks
             setProjectionData([]);
         }
-    }, [currentStock?.symbol]); // Only trigger when the actual stock symbol changes
+    }, [currentStock?.symbol]);
+
+    // 2. Reactively sync Initial Investment whenever symbol OR portfolio changes
+    useEffect(() => {
+        if (currentStock) {
+            const holding = portfolio?.find(p => p.symbol === currentStock.symbol);
+            if (holding) {
+                setInvestment(holding.price * holding.amount);
+            } else {
+                setInvestment(1000); // Default if not owned
+            }
+        }
+    }, [currentStock?.symbol, portfolio]);
 
     const handleSimulate = async () => {
         if (!currentStock) return;
