@@ -26,8 +26,8 @@ export default function StockCard({ data, onBuy }) {
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '1.5rem' }}>
                 <input
                     type="number"
-                    min="0.0001"
-                    step="any"
+                    min="0.01"
+                    step="0.01"
                     className="input"
                     style={{ width: '100px' }}
                     value={amount}
