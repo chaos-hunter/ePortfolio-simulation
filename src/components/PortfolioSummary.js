@@ -53,7 +53,7 @@ function PortfolioItem({ item, onSell }) {
             <div>
                 <strong>{item.symbol}</strong>
                 <span style={{ color: 'var(--text-secondary)', marginLeft: '1rem' }}>
-                    {item.amount.toLocaleString(undefined, { maximumFractionDigits: 4 })} shares @ ${item.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    {item.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} shares @ ${item.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </span>
             </div>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -62,8 +62,8 @@ function PortfolioItem({ item, onSell }) {
                     placeholder="Qty"
                     className="input"
                     style={{ width: '70px', padding: '0.25rem 0.5rem' }}
-                    min="0.0001"
-                    step="any"
+                    min="0.01"
+                    step="0.01"
                     max={item.amount}
                     value={sellAmount}
                     onChange={(e) => setSellAmount(e.target.value)}
