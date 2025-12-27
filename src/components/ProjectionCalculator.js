@@ -72,15 +72,15 @@ export default function ProjectionCalculator({ currentStock, portfolio }) {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
                 <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Initial Investment ($)</label>
-                    <input type="number" className="input" value={investment} onChange={(e) => setInvestment(Number(e.target.value))} />
+                    <input type="number" step="0.01" className="input" value={investment} onChange={(e) => setInvestment(Number(e.target.value))} />
                 </div>
                 <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Duration (Years)</label>
-                    <input type="number" className="input" value={years} onChange={(e) => setYears(Number(e.target.value))} />
+                    <input type="number" step="1" className="input" value={years} onChange={(e) => setYears(Number(e.target.value))} />
                 </div>
                 <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem' }}>Expected Annual Return (%)</label>
-                    <input type="number" className="input" value={rate} onChange={(e) => setRate(Number(e.target.value))} />
+                    <input type="number" step="0.01" className="input" value={rate} onChange={(e) => setRate(Number(e.target.value))} />
                 </div>
             </div>
 
