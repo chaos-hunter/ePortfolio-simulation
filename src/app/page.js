@@ -127,9 +127,11 @@ export default function Home() {
                 type="number"
                 placeholder="Amount to Add"
                 className="input"
+                style={{ width: '100px' }}
                 value={depositAmount}
                 onChange={(e) => setDepositAmount(e.target.value)}
-                min="1"
+                min="0.01"
+                step="0.01"
               />
               <button type="submit" className="btn btn-primary">+</button>
             </form>
